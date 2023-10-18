@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@WebServlet("/users")
+@WebServlet("/Users")
 public class UsersServlets extends HttpServlet {
 
     private static final String DB_USER = "postgres";
@@ -52,7 +52,7 @@ public class UsersServlets extends HttpServlet {
         List result = null;
         result = usersRepository.findAllByAge();
         request.setAttribute("usersForJsp", result);
-        request.getRequestDispatcher("/jsp/users.gsp").forward(request,response);
+        request.getRequestDispatcher("/jsp/Users.jsp").forward(request,response);
     }
 }
 

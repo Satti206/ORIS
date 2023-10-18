@@ -1,5 +1,6 @@
 package interfaces;
 
+import interfaces.CrudRepository;
 import models.User;
 
 import java.util.List;

@@ -17,7 +17,6 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
 
     private Statement statement;
 
-    private static final String SQL_SELECT_ALL_FROM_DRIVER = "select * from driver";
     private static final String SQL_INSERT_INTO_USERS = "insert into driver(login,password,name,surname) values ";
 
     public UsersRepositoryJdbcImpl(Connection connection, Statement statement) {
@@ -60,13 +59,33 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
         System.out.println(entity.getLogin() + " " + entity.getPassword() + " " + entity.getName() + " " + entity.getSurname());
 
     }
+
     @Override
     public List<User> findAll() {
         return null;
     }
 
     @Override
-    public Optional<User> findByLogin(User login) {
+    public Optional<User> findByLogin(User user) {
+        try {
+            String login = user.getLogin();
+            String password = user.getPassword();
+
+            String sql = "SELECT * FROM driver WHERE login = '" + login + "' AND password = '" + password + "'";
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            if (resultSet.next()) {
+                User user1 = User.builder()
+                        .id(resultSet.getLong("id"))
+                        .login(resultSet.getString("login"))
+                        .password(resultSet.getString("password"))
+                        .build();
+                return Optional.of(user1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return Optional.empty();
     }
 }

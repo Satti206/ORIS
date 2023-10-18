@@ -42,7 +42,7 @@ public class AuthenticationServlet extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
+        request.getRequestDispatcher("jsp/Authorization.jsp").forward(request, response);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter("login");
@@ -55,11 +55,11 @@ public class AuthenticationServlet extends HttpServlet {
                 .build());
 
         if (user.isPresent()) {
-            request.getSession().setAttribute("user", user.get());
-            response.sendRedirect("users");
+            // request.getSession().setAttribute("user", user.get());
+            response.sendRedirect("Users");
         } else {
             request.setAttribute("error", "Invalid username or password.");
-            request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
+            request.getRequestDispatcher("jsp/Authorization.jsp").forward(request, response);
         }
     }
 }

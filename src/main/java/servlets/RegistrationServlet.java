@@ -40,7 +40,7 @@ public class RegistrationServlet extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/jsp/register.jsp").forward(request, response);
+        request.getRequestDispatcher("/jsp/Registration.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -58,6 +58,6 @@ public class RegistrationServlet extends HttpServlet {
                 .build();
 
         usersRepository.save(newUser);
-        response.sendRedirect("login");
+        response.sendRedirect("Login");
     }
 }
